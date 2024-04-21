@@ -1,0 +1,117 @@
+{
+    "contracts": {
+        "filename1.sol": {
+            "contract1": {
+                "abi": [
+                    {
+                        "inputs": [
+                            {
+                                "name": "",
+                                "type": ""
+                            },
+                            {
+                                "name": "",
+                                "type": ""
+                            }
+                        ],
+                        "name": "",
+                        "type": ""
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "name": "",
+                                "type": ""
+                            },
+                            {
+                                "name": "",
+                                "type": ""
+                            }
+                        ],
+                        "name": "",
+                        "type": ""
+                    }
+                ]
+            },
+            "contract2": {
+                "abi": [
+                    {
+                        "inputs": [],
+                        "name": "",
+                        "type": ""
+                    },
+                    {
+                        "inputs": [],
+                        "name": "",
+                        "type": ""
+                    }
+                ]
+            }
+        }
+    }
+}
+{
+    "filename": {
+        "contract_name": {
+            "function_type": {
+                "function_name": {
+                    "parameter_type": {
+                        "parameter_name": "",
+                        "parameter_name": ""
+                    },
+                }
+            }
+        }
+    }
+}
+{
+    "filename": {
+        "contract1": {
+            "abi_type1": {
+                "name1": {
+                    "inputs_type1": {
+                        "name1": "",
+                        "name2": ""
+                    },
+                    "inputs_type2": {
+                        "name1": "",
+                        "name2": ""
+                    }
+                },
+                "name2": {
+                    "inputs_type1": {
+                        "name1": "",
+                        "name2": ""
+                    },
+                    "inputs_type2": {
+                        "name1": "",
+                        "name2": ""
+                    }
+                }
+            },
+            "abi_type2": {
+                "name1": {
+                    "inputs_type1": {
+                        "name1": "",
+                        "name2": ""
+                    },
+                    "inputs_type2": {
+                        "name1": "",
+                        "name2": ""
+                    }
+                },
+                "name2": {
+                    "inputs_type1": {
+                        "name1": "",
+                        "name2": ""
+                    },
+                    "inputs_type2": {
+                        "name1": "",
+                        "name2": ""
+                    }
+                }
+            }
+        }
+    }
+}
+
