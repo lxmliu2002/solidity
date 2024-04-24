@@ -72,7 +72,7 @@ error VF_InvalidTemplate(address template);
  *
  * @param tokenId                            AW-V2 tokenId of the asset vault.
  */
-error VF_TokenIdOutOfBounds(uint256 tokenId, uint256 tokenId1);
+error VF_TokenIdOutOfBounds(uint256 tokenId);
 
 /**
  * @notice Cannot transfer with withdraw enabled.
