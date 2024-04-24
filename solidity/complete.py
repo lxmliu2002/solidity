@@ -168,19 +168,47 @@ def file_import(path, importlists:list=None, G=None):
         G = {}
     try:
         with open(path, 'r', encoding='utf-8') as file:
-            content = file.read()
+            lines = file.readlines()
         pattern = r"import\s+[\'\"](.+?)[\'\"]\;"
-        matches = re.findall(pattern, content)
-        for match in matches:
-            file_name = os.path.basename(path)
-            if file_name not in G:
-                G[file_name] = []
-            if match not in G[file_name]:
-                G[file_name].append(match)
-            matchpath = os.path.join(os.path.dirname(path), match[2:])
-            if os.path.exists(matchpath):
-                file_import(matchpath, importlists, G)
-                importlists.append(matchpath)
+        pattern_from = r"import\s*{.*}\s*from\s*[\'\"](.+?)[\'\"]\;"
+        file_name = os.path.basename(path)
+        if file_name not in G:
+            G[file_name] = []
+        for line in lines:
+            if re.match(pattern, line):
+                match = re.match(pattern, line)
+                matchpath = os.path.join(os.path.dirname(path), match.group(1)[2:])
+                if os.path.exists(matchpath):
+                    file_import(matchpath, importlists, G)
+                    importlists.append(matchpath)
+                # importlists.append(matchpath)
+                if match not in G[file_name]:
+                    G[file_name].append(match)
+                continue
+            if re.match(pattern_from, line):
+                match = re.match(pattern_from, line)
+                matchpath = os.path.join(os.path.dirname(path), match.group(1)[2:])
+                # importlists.append(matchpath)
+                if os.path.exists(matchpath):
+                    file_import(matchpath, importlists, G)
+                    importlists.append(matchpath)
+                if match not in G[file_name]:
+                    G[file_name].append(match)
+                continue
+            
+
+
+        # matches = re.findall(pattern, content)
+        # file_name = os.path.basename(path)
+        # if file_name not in G:
+        #     G[file_name] = []
+        # for match in matches:
+        #     if match not in G[file_name]:
+        #         G[file_name].append(match)
+        #     matchpath = os.path.join(os.path.dirname(path), match[2:])
+        #     if os.path.exists(matchpath):
+        #         file_import(matchpath, importlists, G)
+        #         importlists.append(matchpath)
 
     except Exception as e:
         pass
