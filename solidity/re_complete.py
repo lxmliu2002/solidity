@@ -2,8 +2,11 @@ import os
 import re
 import json
 from tqdm import tqdm
-import traceback
 import time
+import timeout_decorator
+import multiprocessing
+import traceback
+from functools import partial
 
 
 def delete_comments(allstr):
@@ -177,12 +180,42 @@ def process_directory(source_code_folder):
         except Exception as e:
             handle_error(e, p)
 
+def multi_process_directory(source_code_folder, p):
+
+    path = os.path.join(source_code_folder, p)
+    try:
+        if not check_sol_files(path):
+            raise FileNotFoundError("Error: No contracts found.")
+        filename = get_filename(path)
+        output_filename = "complete_" + filename
+        filepath = os.path.join(path, filename)
+        out_filepath = os.path.join(path, output_filename)
+        
+        get_version(filepath, out_filepath)
+        
+        G, original_dict, delete_dict = file_import(filepath)
+        with open(out_filepath, 'a') as f:
+            for file_name, contents in delete_dict.items():
+                f.write(contents)
+        
+    except FileNotFoundError as e:
+        handle_error(e, p)
+    except Exception as e:
+        handle_error(e, p)
+
 if __name__ == "__main__":
     st = time.time()
     
     source_code_folder = '/home/lxm/solidity/a'
+    num_processes = 56
     
     process_directory(source_code_folder)
+    
+    # with multiprocessing.Pool(processes=num_processes) as pool:
+    #     process_func = partial(multi_process_directory, source_code_folder)
+    #     list(tqdm(pool.imap(process_func, [p for p in os.listdir(source_code_folder)]), total = len(os.listdir(source_code_folder))))
+    #     pool.close()
+    #     pool.join()
 
     ed = time.time()
     print("Total Time Cost:",ed - st)
