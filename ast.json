@@ -1,0 +1,663 @@
+{
+    "sources": {
+        "A.sol": {
+            "ast": {
+                "absolutePath": "A.sol",
+                "id": 33,
+                "license": "MIT",
+                "nodeType": "SourceUnit",
+                "nodes": [
+                    {
+                        "id": 1,
+                        "literals": [
+                            "solidity",
+                            "^",
+                            "0.8",
+                            ".0"
+                        ],
+                        "nodeType": "PragmaDirective",
+                        "src": "34:23:0"
+                    },
+                    {
+                        "file": "./B.sol",
+                        "id": 3,
+                        "nodeType": "ImportDirective",
+                        "src": "60:28:0",
+                        "symbolAliases": [
+                            {
+                                "foreign": {
+                                    "id": 2,
+                                    "name": "B",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "src": "69:1:0",
+                                    "typeDescriptions": {}
+                                }
+                            }
+                        ],
+                        "unitAlias": ""
+                    },
+                    {
+                        "abstract": false,
+                        "baseContracts": [],
+                        "contractDependencies": [],
+                        "contractKind": "contract",
+                        "id": 32,
+                        "name": "A",
+                        "nodeType": "ContractDefinition",
+                        "nodes": [
+                            {
+                                "constant": false,
+                                "id": 5,
+                                "mutability": "mutable",
+                                "name": "aData",
+                                "nodeType": "VariableDeclaration",
+                                "src": "106:17:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {},
+                                "typeName": {
+                                    "id": 4,
+                                    "name": "uint",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "106:4:0",
+                                    "typeDescriptions": {}
+                                },
+                                "visibility": "public"
+                            },
+                            {
+                                "constant": false,
+                                "id": 8,
+                                "mutability": "mutable",
+                                "name": "bContract",
+                                "nodeType": "VariableDeclaration",
+                                "src": "127:18:0",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {},
+                                "typeName": {
+                                    "id": 7,
+                                    "nodeType": "UserDefinedTypeName",
+                                    "pathNode": {
+                                        "id": 6,
+                                        "name": "B",
+                                        "nodeType": "IdentifierPath",
+                                        "src": "127:1:0"
+                                    },
+                                    "src": "127:1:0",
+                                    "typeDescriptions": {}
+                                },
+                                "visibility": "public"
+                            },
+                            {
+                                "body": {
+                                    "id": 30,
+                                    "nodeType": "Block",
+                                    "src": "200:60:0",
+                                    "statements": [
+                                        {
+                                            "expression": {
+                                                "id": 19,
+                                                "leftHandSide": {
+                                                    "id": 17,
+                                                    "name": "aData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "204:5:0",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "id": 18,
+                                                    "name": "_aData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "212:6:0",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "src": "204:14:0",
+                                                "typeDescriptions": {}
+                                            },
+                                            "id": 20,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "204:14:0"
+                                        },
+                                        {
+                                            "expression": {
+                                                "id": 28,
+                                                "leftHandSide": {
+                                                    "id": 21,
+                                                    "name": "bContract",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "222:9:0",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "arguments": [
+                                                        {
+                                                            "id": 25,
+                                                            "name": "_bData",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "src": "240:6:0",
+                                                            "typeDescriptions": {}
+                                                        },
+                                                        {
+                                                            "id": 26,
+                                                            "name": "_cData",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "src": "248:6:0",
+                                                            "typeDescriptions": {}
+                                                        }
+                                                    ],
+                                                    "expression": {
+                                                        "id": 24,
+                                                        "nodeType": "NewExpression",
+                                                        "src": "234:5:0",
+                                                        "typeDescriptions": {},
+                                                        "typeName": {
+                                                            "id": 23,
+                                                            "nodeType": "UserDefinedTypeName",
+                                                            "pathNode": {
+                                                                "id": 22,
+                                                                "name": "B",
+                                                                "nodeType": "IdentifierPath",
+                                                                "src": "238:1:0"
+                                                            },
+                                                            "src": "238:1:0",
+                                                            "typeDescriptions": {}
+                                                        }
+                                                    },
+                                                    "id": 27,
+                                                    "names": [],
+                                                    "nodeType": "FunctionCall",
+                                                    "src": "234:21:0",
+                                                    "tryCall": false,
+                                                    "typeDescriptions": {}
+                                                },
+                                                "src": "222:33:0",
+                                                "typeDescriptions": {}
+                                            },
+                                            "id": 29,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "222:33:0"
+                                        }
+                                    ]
+                                },
+                                "id": 31,
+                                "implemented": true,
+                                "kind": "constructor",
+                                "modifiers": [],
+                                "name": "",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 15,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 10,
+                                            "mutability": "mutable",
+                                            "name": "_aData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "161:11:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 9,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "161:4:0",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 12,
+                                            "mutability": "mutable",
+                                            "name": "_bData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "174:11:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 11,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "174:4:0",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 14,
+                                            "mutability": "mutable",
+                                            "name": "_cData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "187:11:0",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 13,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "187:4:0",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "160:39:0"
+                                },
+                                "returnParameters": {
+                                    "id": 16,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [],
+                                    "src": "200:0:0"
+                                },
+                                "src": "149:111:0",
+                                "stateMutability": "nonpayable",
+                                "virtual": false
+                            }
+                        ],
+                        "src": "91:173:0"
+                    }
+                ],
+                "src": "34:233:0"
+            },
+            "id": 0
+        },
+        "B.sol": {
+            "ast": {
+                "absolutePath": "B.sol",
+                "id": 63,
+                "license": "MIT",
+                "nodeType": "SourceUnit",
+                "nodes": [
+                    {
+                        "id": 34,
+                        "literals": [
+                            "solidity",
+                            "^",
+                            "0.8",
+                            ".0"
+                        ],
+                        "nodeType": "PragmaDirective",
+                        "src": "34:23:1"
+                    },
+                    {
+                        "file": "./C.sol",
+                        "id": 36,
+                        "nodeType": "ImportDirective",
+                        "src": "60:28:1",
+                        "symbolAliases": [
+                            {
+                                "foreign": {
+                                    "id": 35,
+                                    "name": "C",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "src": "69:1:1",
+                                    "typeDescriptions": {}
+                                }
+                            }
+                        ],
+                        "unitAlias": ""
+                    },
+                    {
+                        "abstract": false,
+                        "baseContracts": [],
+                        "contractDependencies": [],
+                        "contractKind": "contract",
+                        "id": 62,
+                        "name": "B",
+                        "nodeType": "ContractDefinition",
+                        "nodes": [
+                            {
+                                "constant": false,
+                                "id": 38,
+                                "mutability": "mutable",
+                                "name": "bData",
+                                "nodeType": "VariableDeclaration",
+                                "src": "106:17:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {},
+                                "typeName": {
+                                    "id": 37,
+                                    "name": "uint",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "106:4:1",
+                                    "typeDescriptions": {}
+                                },
+                                "visibility": "public"
+                            },
+                            {
+                                "constant": false,
+                                "id": 41,
+                                "mutability": "mutable",
+                                "name": "cContract",
+                                "nodeType": "VariableDeclaration",
+                                "src": "127:18:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {},
+                                "typeName": {
+                                    "id": 40,
+                                    "nodeType": "UserDefinedTypeName",
+                                    "pathNode": {
+                                        "id": 39,
+                                        "name": "C",
+                                        "nodeType": "IdentifierPath",
+                                        "src": "127:1:1"
+                                    },
+                                    "src": "127:1:1",
+                                    "typeDescriptions": {}
+                                },
+                                "visibility": "public"
+                            },
+                            {
+                                "body": {
+                                    "id": 60,
+                                    "nodeType": "Block",
+                                    "src": "187:52:1",
+                                    "statements": [
+                                        {
+                                            "expression": {
+                                                "id": 50,
+                                                "leftHandSide": {
+                                                    "id": 48,
+                                                    "name": "bData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "191:5:1",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "id": 49,
+                                                    "name": "_bData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "199:6:1",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "src": "191:14:1",
+                                                "typeDescriptions": {}
+                                            },
+                                            "id": 51,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "191:14:1"
+                                        },
+                                        {
+                                            "expression": {
+                                                "id": 58,
+                                                "leftHandSide": {
+                                                    "id": 52,
+                                                    "name": "cContract",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "209:9:1",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "arguments": [
+                                                        {
+                                                            "id": 56,
+                                                            "name": "_cData",
+                                                            "nodeType": "Identifier",
+                                                            "overloadedDeclarations": [],
+                                                            "src": "227:6:1",
+                                                            "typeDescriptions": {}
+                                                        }
+                                                    ],
+                                                    "expression": {
+                                                        "id": 55,
+                                                        "nodeType": "NewExpression",
+                                                        "src": "221:5:1",
+                                                        "typeDescriptions": {},
+                                                        "typeName": {
+                                                            "id": 54,
+                                                            "nodeType": "UserDefinedTypeName",
+                                                            "pathNode": {
+                                                                "id": 53,
+                                                                "name": "C",
+                                                                "nodeType": "IdentifierPath",
+                                                                "src": "225:1:1"
+                                                            },
+                                                            "src": "225:1:1",
+                                                            "typeDescriptions": {}
+                                                        }
+                                                    },
+                                                    "id": 57,
+                                                    "names": [],
+                                                    "nodeType": "FunctionCall",
+                                                    "src": "221:13:1",
+                                                    "tryCall": false,
+                                                    "typeDescriptions": {}
+                                                },
+                                                "src": "209:25:1",
+                                                "typeDescriptions": {}
+                                            },
+                                            "id": 59,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "209:25:1"
+                                        }
+                                    ]
+                                },
+                                "id": 61,
+                                "implemented": true,
+                                "kind": "constructor",
+                                "modifiers": [],
+                                "name": "",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 46,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 43,
+                                            "mutability": "mutable",
+                                            "name": "_bData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "161:11:1",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 42,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "161:4:1",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        },
+                                        {
+                                            "constant": false,
+                                            "id": 45,
+                                            "mutability": "mutable",
+                                            "name": "_cData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "174:11:1",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 44,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "174:4:1",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "160:26:1"
+                                },
+                                "returnParameters": {
+                                    "id": 47,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [],
+                                    "src": "187:0:1"
+                                },
+                                "src": "149:90:1",
+                                "stateMutability": "nonpayable",
+                                "virtual": false
+                            }
+                        ],
+                        "src": "91:152:1"
+                    }
+                ],
+                "src": "34:212:1"
+            },
+            "id": 1
+        },
+        "C.sol": {
+            "ast": {
+                "absolutePath": "C.sol",
+                "id": 78,
+                "license": "MIT",
+                "nodeType": "SourceUnit",
+                "nodes": [
+                    {
+                        "id": 64,
+                        "literals": [
+                            "solidity",
+                            "^",
+                            "0.8",
+                            ".0"
+                        ],
+                        "nodeType": "PragmaDirective",
+                        "src": "34:23:2"
+                    },
+                    {
+                        "abstract": false,
+                        "baseContracts": [],
+                        "contractDependencies": [],
+                        "contractKind": "contract",
+                        "id": 77,
+                        "name": "C",
+                        "nodeType": "ContractDefinition",
+                        "nodes": [
+                            {
+                                "constant": false,
+                                "id": 66,
+                                "mutability": "mutable",
+                                "name": "cData",
+                                "nodeType": "VariableDeclaration",
+                                "src": "75:17:2",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {},
+                                "typeName": {
+                                    "id": 65,
+                                    "name": "uint",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "75:4:2",
+                                    "typeDescriptions": {}
+                                },
+                                "visibility": "public"
+                            },
+                            {
+                                "body": {
+                                    "id": 75,
+                                    "nodeType": "Block",
+                                    "src": "121:23:2",
+                                    "statements": [
+                                        {
+                                            "expression": {
+                                                "id": 73,
+                                                "leftHandSide": {
+                                                    "id": 71,
+                                                    "name": "cData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "125:5:2",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "nodeType": "Assignment",
+                                                "operator": "=",
+                                                "rightHandSide": {
+                                                    "id": 72,
+                                                    "name": "_cData",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "src": "133:6:2",
+                                                    "typeDescriptions": {}
+                                                },
+                                                "src": "125:14:2",
+                                                "typeDescriptions": {}
+                                            },
+                                            "id": 74,
+                                            "nodeType": "ExpressionStatement",
+                                            "src": "125:14:2"
+                                        }
+                                    ]
+                                },
+                                "id": 76,
+                                "implemented": true,
+                                "kind": "constructor",
+                                "modifiers": [],
+                                "name": "",
+                                "nodeType": "FunctionDefinition",
+                                "parameters": {
+                                    "id": 69,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [
+                                        {
+                                            "constant": false,
+                                            "id": 68,
+                                            "mutability": "mutable",
+                                            "name": "_cData",
+                                            "nodeType": "VariableDeclaration",
+                                            "src": "108:11:2",
+                                            "stateVariable": false,
+                                            "storageLocation": "default",
+                                            "typeDescriptions": {},
+                                            "typeName": {
+                                                "id": 67,
+                                                "name": "uint",
+                                                "nodeType": "ElementaryTypeName",
+                                                "src": "108:4:2",
+                                                "typeDescriptions": {}
+                                            },
+                                            "visibility": "internal"
+                                        }
+                                    ],
+                                    "src": "107:13:2"
+                                },
+                                "returnParameters": {
+                                    "id": 70,
+                                    "nodeType": "ParameterList",
+                                    "parameters": [],
+                                    "src": "121:0:2"
+                                },
+                                "src": "96:48:2",
+                                "stateMutability": "nonpayable",
+                                "virtual": false
+                            }
+                        ],
+                        "src": "60:88:2"
+                    }
+                ],
+                "src": "34:117:2"
+            },
+            "id": 2
+        }
+    }
+}
