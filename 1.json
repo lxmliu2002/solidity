@@ -1,0 +1,77 @@
+{'01_01_TURTLES.sol': {'Context': {}, 'IERC20': {'event': {'Approval': {'address': ['owner', 'spender'
+                    ], 'uint256': ['value'
+                    ]
+                }, 'Transfer': {'address': ['from', 'to'
+                    ], 'uint256': ['value'
+                    ]
+                }
+            }, 'function': {'allowance': {'address': ['owner', 'spender'
+                    ]
+                }, 'approve': {'address': ['spender'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'balanceOf': {'address': ['account'
+                    ]
+                }, 'totalSupply': {}, 'transfer': {'address': ['recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'transferFrom': {'address': ['sender', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }
+            }
+        }, 'IUniswapV2Factory': {'function': {'createPair': {'address': ['tokenA', 'tokenB'
+                    ]
+                }
+            }
+        }, 'IUniswapV2Router02': {'function': {'WETH': {}, 'addLiquidityETH': {'address': ['token', 'to'
+                    ], 'uint256': ['amountTokenDesired', 'amountTokenMin', 'amountETHMin', 'deadline'
+                    ]
+                }, 'factory': {}, 'swapExactTokensForETHSupportingFeeOnTransferTokens': {'uint256': ['amountIn', 'amountOutMin', 'deadline'
+                    ], 'address[]': ['path'
+                    ], 'address': ['to'
+                    ]
+                }
+            }
+        }, 'Ownable': {'constructor': {'constructor': {}
+            }, 'event': {'OwnershipTransferred': {'address': ['previousOwner', 'newOwner'
+                    ]
+                }
+            }, 'function': {'owner': {}, 'renounceOwnership': {}
+            }
+        }, 'SafeMath': {}, 'TURTLES': {'constructor': {'constructor': {}
+            }, 'event': {'Approval': {'address': ['owner', 'spender'
+                    ], 'uint256': ['value'
+                    ]
+                }, 'MaxTxAmountUpdated': {'uint256': ['_maxTxAmount'
+                    ]
+                }, 'OwnershipTransferred': {'address': ['previousOwner', 'newOwner'
+                    ]
+                }, 'Transfer': {'address': ['from', 'to'
+                    ], 'uint256': ['value'
+                    ]
+                }
+            }, 'function': {'_maxTaxSwap': {}, '_maxTxAmount': {}, '_maxWalletSize': {}, '_taxSwapThreshold': {}, 'addBots': {'address[]': ['bots_'
+                    ]
+                }, 'allowance': {'address': ['owner', 'spender'
+                    ]
+                }, 'approve': {'address': ['spender'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'balanceOf': {'address': ['account'
+                    ]
+                }, 'decimals': {}, 'delBots': {'address[]': ['notbot'
+                    ]
+                }, 'isBot': {'address': ['a'
+                    ]
+                }, 'name': {}, 'openTrading': {}, 'owner': {}, 'removeLimits': {}, 'renounceOwnership': {}, 'symbol': {}, 'totalSupply': {}, 'transfer': {'address': ['recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'transferFrom': {'address': ['sender', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }
+            }, 'receive': {}
+        }
+    }
+}

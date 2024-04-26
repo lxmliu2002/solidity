@@ -1,6 +1,6 @@
 {
     "contracts": {
-        "integration_GnosisSafeProxy.sol": {
+        "GnosisSafeProxy.sol": {
             "GnosisSafeProxy": {
                 "abi": [
                     {

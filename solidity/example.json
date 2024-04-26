@@ -51,28 +51,28 @@
         }
     }
 }
-
 // extracted
 {
     "filename": {
-        "contract_name": {
-            "function_type": {
-                "function_name": {
-                    "parameter_type": {
-                        "parameter_name": "",
-                        "parameter_name": ""
-                    },
+        "contract_type": {
+            "contract_name": {
+                "function_type": {
+                    "function_name": {
+                        "parameter_type": {
+                            "parameter_name": "",
+                            "parameter_name": ""
+                        },
+                    }
                 }
             }
         }
     }
 }
-
 // abis
 {
     "filename": {
         "contract1": {
-            "abi_type1": {
+            "function_type1": {
                 "name1": {
                     "inputs_type1": {
                         "name1": "",
@@ -119,4 +119,3 @@
         }
     }
 }
-

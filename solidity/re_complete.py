@@ -91,6 +91,7 @@ def get_contents(input_file_path):
     data += '\n'
     return data
 
+@timeout_decorator.timeout(50, use_signals=True)
 def file_import(filepath, G:dict = None, original_dict:dict = None, delete_dict:dict = None):
     if G is None:
         G = {}
@@ -206,7 +207,7 @@ def multi_process_directory(source_code_folder, p):
 if __name__ == "__main__":
     st = time.time()
     
-    source_code_folder = '/home/lxm/solidity/a'
+    source_code_folder = '/home/lxm/solidity/solidity/newnew/codes'
     num_processes = 56
     
     process_directory(source_code_folder)
