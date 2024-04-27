@@ -77,8 +77,6 @@ def read_abis(abi_path):
                 
                 if abi_name:
                     abis[filename][contract_name][abi_type][abi_name] = {}
-                # print(f"{abi_type}: {abi_name}")
-                # print(abis[filename][contract_name][abi_type])
                 if abi_inputs:
                     for input_item in abi_inputs:
                         input_type = input_item.get('internalType', None)
@@ -217,9 +215,6 @@ def get_parameters(parameters):
     parameters = parameters.split(',')
     parameters = [parameter.strip() for parameter in parameters]
     result = {}
-    # pattern = r"import\s+[\'\"](.+?)[\'\"]\;"
-    # pattern_1 = r"\s*(address|string|bool)\s*"
-    # pattern_2 = r"\s*(byte|uint)\s*"
     
     for parameter in parameters:
         parameter = parameter.split(' ')
@@ -234,8 +229,6 @@ def get_parameters(parameters):
 
 def extract_functions(filename, function_details, extracted={}):
     def find_scopes(contract_content):
-        # with open(filename, 'r') as f:
-        #     contract_content = f.read()
         
         scopes = {'interface': {}, 'contract': {}, 'library': {}, 'error': {}}
         current_type = None
@@ -243,8 +236,6 @@ def extract_functions(filename, function_details, extracted={}):
         lines = contract_content.split('\n')
         stack = []
         for line in lines:
-            # print(line)
-            # print(stack)
             interface_match = re.match(r'^\s*interface\s+(\w+)\s*{', line)
             interface_is_match = re.match(r'^\s*interface\s+(\w+)\s+(is).*{', line)
             contract_match = re.match(r'^(abstract)*\s*contract\s+(\w+)\s*{', line)
@@ -252,8 +243,6 @@ def extract_functions(filename, function_details, extracted={}):
             library_match = re.match(r'^\s*library\s+(\w+)\s*{', line)
             error_match = re.match(r'^(error)\s+(\w+)\s*\((.*?)\)\s*', line)
             if error_match:
-                # if '{' in line:
-                #     stack.append('{')
                 current_type = 'error'
                 current_name = error_match.group(2)
                 scopes[current_type][current_name] = {}
@@ -265,58 +254,45 @@ def extract_functions(filename, function_details, extracted={}):
                 continue
 
             if interface_is_match:
-                # print(contract_is_match)
                 if '{' in line:
                     stack.append('{')
-                # print(stack)
                 current_type = 'contract'
                 current_name = interface_is_match.group(1)
-                # print(current_name)
                 scopes[current_type][current_name] = []
                 continue
             if interface_match:
                 stack.append('{')
-                # print(stack)
                 current_type = 'interface'
                 current_name = interface_match.group(1)
                 scopes[current_type][current_name] = []
                 continue
             if contract_is_match:
-                # print(contract_is_match)
                 if '{' in line:
                     stack.append('{')
-                # print(stack)
                 current_type = 'contract'
                 current_name = contract_is_match.group(2)
-                # print(current_name)
                 scopes[current_type][current_name] = []
                 continue
             if contract_match:
-                # print(contract_match)
                 stack.append('{')
-                # print(stack)
                 current_type = 'contract'
                 current_name = contract_match.group(2)
                 scopes[current_type][current_name] = []
                 continue
             if library_match:
                 stack.append('{')
-                # print(stack)
                 current_type = 'library'
                 current_name = library_match.group(1)
                 scopes[current_type][current_name] = []
                 continue
             
             if '{' in line:
-            # if re.match(r'*{*', line):
                 stack.append('{')
-                # print(stack)
                 scopes[current_type][current_name].append(line)
                 continue
                 
             if re.match(r'^\s*}\s*$', line):
                 stack.pop()
-                # print(stack)
                 if len(stack) == 0:
                     current_type = None
                     current_name = None
@@ -328,31 +304,22 @@ def extract_functions(filename, function_details, extracted={}):
                 scopes[current_type][current_name].append(line)
         return scopes
     events_functions = find_scopes(function_details)
-    # filename = os.path.basename(filepath)
-    #print(filename)
-    # if extracted[filename] is None:
     extracted[filename] = {'interface': {}, 'contract': {}, 'library': {}, 'error': {}}
 
-    # extracted[filename] = {'interface': {}, 'contract': {}, 'library': {}, 'error': {}}
     error_flag = False
     for contract_type, items in events_functions.items():
-        # print(contract_type)
         if contract_type == 'error':
             if error_flag:
                 continue
             extracted[filename]['error'] = events_functions['error']
             error_flag = True
             continue
-        # extracted[filename] = {}
         for contract_name, code in items.items():
-            # print(contract_name)
             extracted[filename][contract_type][contract_name] = {}
             stack = []
-            # if contract_name == 'error':
-            #     continue
+
             for index in range(len(code)):
                 line = code[index]
-                #print(line)
                 match = re.match(r'^\s*(event|function|modifier|error)\s+(\w+)\s*\((.*?)\)\s*', line)
                 if match:
                     function_type = match.group(1)
@@ -377,7 +344,6 @@ def extract_functions(filename, function_details, extracted={}):
                     continue
                 match = re.match(r'^\s*(event|function|modifier|error)\s+(\w+)\s*\(+', line)
                 if match:
-                    # print(match)
                     stack.append('(')
                     function_type = match.group(1)
                     if function_type not in extracted[filename][contract_type][contract_name]:
@@ -405,7 +371,6 @@ def extract_functions(filename, function_details, extracted={}):
                         extracted[filename][contract_type][contract_name][function_type] = {}
                     function_name = match.group(2)
                     extracted[filename][contract_type][contract_name][function_type][function_name] = {}
-                    # while '(' in line:
                         
                     if '(' in line:
                         stack.append('(')
@@ -443,7 +408,6 @@ def extract_functions(filename, function_details, extracted={}):
                                     parameters += line.strip()
                                     index += 1
                                 break
-                            # line += code[index]
                             index += 1
                         extracted[filename][contract_type][contract_name][function_type][function_name] = {'': ['']}
                     continue
@@ -475,13 +439,23 @@ def extract_functions(filename, function_details, extracted={}):
     return extracted
 
 def remove_function_block(input_string, aim_string):
-    function_index = input_string.find(aim_string)
+    start = 0
+    function_index = []
+    while True:
+        tmp_index = input_string.find(aim_string, start)
+        if tmp_index == -1:
+            break
+        function_index.append(tmp_index)
+        start = tmp_index + 1
+        
+    if len(function_index) > 1 or len(function_index) == 0:
+        return input_string
     if function_index == -1:
         return input_string
     
     stack = []
     end_index = None
-    for i in range(function_index, len(input_string)):
+    for i in range(function_index[0], len(input_string)):
         if input_string[i] == '{':
             stack.append('{')
         elif input_string[i] == '}':
@@ -495,67 +469,40 @@ def remove_function_block(input_string, aim_string):
             break
 
     if end_index is not None:
-        output_string = input_string[:function_index] + input_string[end_index+1:]
+        output_string = input_string[:function_index[0]] + input_string[end_index+1:]
     else:
         output_string = input_string
     
     return output_string
 
 def get_final(delete_dict, abis, functions_events):
-    # print(abis)
-    # print(1)
+
     final_dict = delete_dict
-    # print(functions_events)
     for filename, items in functions_events.items():
-        # print(filename)
-        # print(1)
-        # for filenames , tmp in abis.items():
-            # for filename in filenames:
-            # print(filename)
-            # print(f"{filenames} {abis[filenames]}")
-        # final_dict[filename]
-        # print(functions_events[filename])
-        # print(1)
-        # print(abis[filename])
-        # print(abis[filename])
         tmp = final_dict[filename]
-        # print(tmp)
         for contract_type, contracts in items.items():
-            # print(contract_type)
             for contract_name, functions in contracts.items():
-                # print(contract_name)
                 if contract_name not in abis[filename]:
                     select_str = contract_type + " " + contract_name
                     tmp = remove_function_block(tmp, select_str)
                 for function_type, function_details in functions.items():
-                    # print(function_type)
                     for function_name, parameters in function_details.items():
-                        # print(1)
-                        # print(function_name)
-                        # print(2)
                         if function_name == 'constructor' or function_name == 'fallback' or function_name == 'receive':
                             
                             if function_name not in abis[filename][contract_name]:
-                                # print(1)
-                                # print(function_name)
                                 select_str = function_type
                                 tmp = remove_function_block(tmp, select_str)
                                 continue
-                            if '' not in parameters:
-                                # print(parameters)
-                                for parameters_type, parameters_name in parameters.items():
-                                    for parameter_name in parameters_name:
-                                        if parameter_name not in abis[filename][contract_name][function_name][function_name][parameters_type]:
-                                            # print(2)
-                                            # print(parameter_name)
-                                            select_str = function_type
-                                            tmp = remove_function_block(tmp, select_str)
-                                            continue
-                                    continue
-                                continue
-                                        # print(1)
-                                # print(tmp)
-                        # print(abis)
+                            # if '' not in parameters:
+                            #     # print(parameters)
+                            #     for parameters_type, parameters_name in parameters.items():
+                            #         for parameter_name in parameters_name:
+                            #             if parameter_name not in abis[filename][contract_name][function_name][function_name][parameters_type]:
+                            #                 select_str = function_type
+                            #                 tmp = remove_function_block(tmp, select_str)
+                            #                 continue
+                            #         continue
+                            #     continue
                         if function_type not in abis[filename][contract_name]:
                             select_str = function_type + " " + function_name
                             tmp = remove_function_block(tmp, select_str)
@@ -564,15 +511,13 @@ def get_final(delete_dict, abis, functions_events):
                             select_str = function_type + " " + function_name
                             tmp = remove_function_block(tmp, select_str)
                             continue
-                        if '' not in parameters:
-                            for parameters_type, parameters_name in parameters.items():
-                                for parameter_name in parameters_name:
-                                    print(f"{filename} {contract_name} {function_type} {function_name} {parameters_type} {parameter_name}")
-                                    print(abis[filename][contract_name][function_type][function_name])
-                                    if parameter_name not in abis[filename][contract_name][function_type][function_name][parameters_type]:
-                                        select_str = function_type + " " + function_name
-                                        tmp = remove_function_block(tmp, select_str)
-                                        continue
+                        # if '' not in parameters:
+                        #     for parameters_type, parameters_name in parameters.items():
+                        #         for parameter_name in parameters_name:
+                        #             if parameter_name not in abis[filename][contract_name][function_type][function_name][parameters_type]:
+                        #                 select_str = function_type + " " + function_name
+                        #                 tmp = remove_function_block(tmp, select_str)
+                        #                 continue
         final_dict[filename] = tmp
     return final_dict
 
@@ -589,7 +534,6 @@ def process_directory(source_code_folder, jsons_folder, json_list):
             if not check_sol_files(path):
                 raise FileNotFoundError("Error: No contracts found.")
             filename = get_filename(path)
-            #print(filename)
             output_filename = "delete_" + filename
             filepath = os.path.join(path, filename)
             out_filepath = os.path.join(path, output_filename)
@@ -601,18 +545,13 @@ def process_directory(source_code_folder, jsons_folder, json_list):
             try:
             
                 json_path = os.path.join(jsons_folder, get_json_path(json_list, filepath))
-                #print(json_path)
                 abis = read_abis(json_path)
-                #print(abis)
                 
                 extracted = {}
                 functions_events = {}
                 for filename, items in delete_dict.items():
                     functions_events = extract_functions(filename, delete_dict[filename], extracted)
                     extracted = {}
-                
-                # functions_events = extract_functions(filepath, extracted)
-                #print(1)
                 
                 final_dict = get_final(delete_dict, abis, functions_events)
                 
@@ -633,7 +572,6 @@ def multi_process_directory(source_code_folder, jsons_folder, json_list, p):
         if not check_sol_files(path):
             raise FileNotFoundError("Error: No contracts found.")
         filename = get_filename(path)
-        #print(filename)
         output_filename = "delete_" + filename
         filepath = os.path.join(path, filename)
         out_filepath = os.path.join(path, output_filename)
@@ -642,20 +580,24 @@ def multi_process_directory(source_code_folder, jsons_folder, json_list, p):
         
         G, original_dict, delete_dict = file_import(filepath)
         
-        json_path = os.path.join(jsons_folder, get_json_path(json_list, filepath))
-        #print(json_path)
-        abis = read_abis(json_path)
-        #print(abis)
+        try:
         
-        extracted = {}
-        functions_events = extract_functions(filepath, extracted)
-        #print(1)
-        
-        final_dict = get_final(delete_dict, abis, functions_events)
-        
-        with open(out_filepath, 'a') as f:
-            for file_name, contents in final_dict.items():
-                f.write(contents)
+            json_path = os.path.join(jsons_folder, get_json_path(json_list, filepath))
+            abis = read_abis(json_path)
+            
+            extracted = {}
+            functions_events = {}
+            for filename, items in delete_dict.items():
+                functions_events = extract_functions(filename, delete_dict[filename], extracted)
+                extracted = {}
+            
+            final_dict = get_final(delete_dict, abis, functions_events)
+            
+            with open(out_filepath, 'a') as f:
+                for file_name, contents in final_dict.items():
+                    f.write(contents)
+        except FileNotFoundError as e:
+            handle_error(e, p)
         
     except FileNotFoundError as e:
         handle_error(e, p)
@@ -669,7 +611,6 @@ if __name__ == "__main__":
     jsons_folder = '/home/lxm/solidity/solidity/newnew copy/jsons'
     
     json_list = [file for file in os.listdir(jsons_folder) if os.path.isfile(os.path.join(jsons_folder, file))]
-    #print(json_list)
     
     num_processes = 56
     
