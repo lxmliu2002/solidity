@@ -72,7 +72,7 @@ def get_filename(path):
 
 def handle_error(e, p, filename=None):
     """Handle errors and write traceback to a file."""
-    with open(os.path.join("/home/lxm/solidity/error", p + ".log"), "w") as file:
+    with open(os.path.join("/mnt/data/chenlongfei/liuxm/solidity/solidity/error", p + ".log"), "w") as file:
         file.write(traceback.format_exc())
 
 def get_contents(input_file_path):
@@ -91,7 +91,24 @@ def get_contents(input_file_path):
     data += '\n'
     return data
 
-@timeout_decorator.timeout(50, use_signals=True)
+def limit_recursion_depth(max_depth):
+    def decorator(func):
+        current_depth = 0
+
+        def wrapper(*args, **kwargs):
+            nonlocal current_depth
+            if current_depth >= max_depth:
+                raise RecursionError("Recursion depth exceeded")
+            current_depth += 1
+            try:
+                return func(*args, **kwargs)
+            finally:
+                current_depth -= 1
+        return wrapper
+    return decorator
+
+# @timeout_decorator.timeout(50, use_signals=True)
+@limit_recursion_depth(10)
 def file_import(filepath, G:dict = None, original_dict:dict = None, delete_dict:dict = None):
     if G is None:
         G = {}
@@ -207,7 +224,7 @@ def multi_process_directory(source_code_folder, p):
 if __name__ == "__main__":
     st = time.time()
     
-    source_code_folder = '/home/lxm/solidity/solidity/newnew/codes'
+    source_code_folder = '/mnt/data/chenlongfei/liuxm/solidity/solidity/contracts/codes'
     num_processes = 56
     
     process_directory(source_code_folder)

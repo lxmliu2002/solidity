@@ -124,7 +124,7 @@ def get_filename(path):
 
 def handle_error(e, p, filename=None):
     """Handle errors and write traceback to a file."""
-    with open(os.path.join("/home/lxm/solidity/error", p + ".log"), "w") as file:
+    with open(os.path.join("/mnt/data/chenlongfei/liuxm/solidity/solidity/error", p + ".log"), "w") as file:
         file.write(traceback.format_exc())
     
 
@@ -145,7 +145,24 @@ def get_contents(input_file_path):
     data += '\n'
     return data
 
-@timeout_decorator.timeout(50, use_signals=True)
+def limit_recursion_depth(max_depth):
+    def decorator(func):
+        current_depth = 0
+
+        def wrapper(*args, **kwargs):
+            nonlocal current_depth
+            if current_depth >= max_depth:
+                raise RecursionError("Recursion depth exceeded")
+            current_depth += 1
+            try:
+                return func(*args, **kwargs)
+            finally:
+                current_depth -= 1
+        return wrapper
+    return decorator
+
+# @timeout_decorator.timeout(50, use_signals=True)
+@limit_recursion_depth(10)
 def file_import(filepath, G:dict = None, original_dict:dict = None, delete_dict:dict = None):
     if G is None:
         G = {}
@@ -607,20 +624,20 @@ def multi_process_directory(source_code_folder, jsons_folder, json_list, p):
 if __name__ == "__main__":
     st = time.time()
     
-    source_code_folder = '/home/lxm/solidity/solidity/newnew copy/codes'
-    jsons_folder = '/home/lxm/solidity/solidity/newnew copy/jsons'
+    source_code_folder = '/mnt/data/chenlongfei/liuxm/solidity/solidity/contracts/codes'
+    jsons_folder = '/mnt/data/chenlongfei/liuxm/solidity/solidity/contracts/jsons'
     
     json_list = [file for file in os.listdir(jsons_folder) if os.path.isfile(os.path.join(jsons_folder, file))]
     
     num_processes = 56
     
-    process_directory(source_code_folder, jsons_folder, json_list)
+    # process_directory(source_code_folder, jsons_folder, json_list)
     
-    # with multiprocessing.Pool(processes=num_processes) as pool:
-    #     process_func = partial(multi_process_directory, source_code_folder, jsons_folder, json_list)
-    #     list(tqdm(pool.imap(process_func, [p for p in os.listdir(source_code_folder)]), total = len(os.listdir(source_code_folder))))
-    #     pool.close()
-    #     pool.join()
+    with multiprocessing.Pool(processes=num_processes) as pool:
+        process_func = partial(multi_process_directory, source_code_folder, jsons_folder, json_list)
+        list(tqdm(pool.imap(process_func, [p for p in os.listdir(source_code_folder)]), total = len(os.listdir(source_code_folder))))
+        pool.close()
+        pool.join()
 
     ed = time.time()
     print("Total Time Cost:",ed - st)
