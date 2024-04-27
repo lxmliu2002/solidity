@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/lxm/solidity/solidity/re_delete.py", line 589, in process_directory
-    functions_events = extract_functions(filepath, extracted)
-  File "/home/lxm/solidity/solidity/re_delete.py", line 330, in extract_functions
-    events_functions = find_scopes(filepath)
-  File "/home/lxm/solidity/solidity/re_delete.py", line 314, in find_scopes
-    scopes[current_type][current_name].append(line)
-KeyError: None

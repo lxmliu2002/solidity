@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/lxm/solidity/solidity/re_delete.py", line 617, in process_directory
+    final_dict = get_final(delete_dict, abis, functions_events)
+  File "/home/lxm/solidity/solidity/re_delete.py", line 572, in get_final
+    if parameter_name not in abis[filename][contract_name][function_type][function_name][parameters_type]:
+KeyError: 'uint256'

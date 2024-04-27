@@ -1,4 +1,222 @@
-{'01_01_TURTLES.sol': {'Context': {}, 'IERC20': {'event': {'Approval': {'address': ['owner', 'spender'
+{'10_21_ICallWhitelist.sol': {'ICallWhitelist': {'event': {'CallAdded': {'address': ['operator', 'callee'
+                    ], 'bytes4': ['selector'
+                    ]
+                }, 'CallRemoved': {'address': ['operator', 'callee'
+                    ], 'bytes4': ['selector'
+                    ]
+                }
+            }, 'function': {'add': {'address': ['callee'
+                    ], 'bytes4': ['selector'
+                    ]
+                }, 'isBlacklisted': {'bytes4': ['selector'
+                    ]
+                }, 'isWhitelisted': {'address': ['callee'
+                    ], 'bytes4': ['selector'
+                    ]
+                }, 'remove': {'address': ['callee'
+                    ], 'bytes4': ['selector'
+                    ]
+                }
+            }
+        }
+    }, '11_21_ICallDelegator.sol': {'ICallDelegator': {'function': {'canCallOn': {'address': ['caller', 'vault'
+                    ]
+                }
+            }
+        }
+    }, '12_21_IAssetVault.sol': {'IAssetVault': {'event': {'Call': {'address': ['operator', 'to'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'WithdrawERC1155': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId', 'amount'
+                    ]
+                }, 'WithdrawERC20': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'WithdrawERC721': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'WithdrawETH': {'address': ['operator', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'WithdrawEnabled': {'address': ['operator'
+                    ]
+                }, 'WithdrawPunk': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }
+            }, 'function': {'call': {'address': ['to'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'enableWithdraw': {}, 'initialize': {'address': ['_whitelist'
+                    ]
+                }, 'whitelist': {}, 'withdrawERC1155': {'address': ['token', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'withdrawERC20': {'address': ['token', 'to'
+                    ]
+                }, 'withdrawERC721': {'address': ['token', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'withdrawETH': {'address': ['to'
+                    ]
+                }, 'withdrawEnabled': {}, 'withdrawPunk': {'address': ['punks', 'to'
+                    ], 'uint256': ['punkIndex'
+                    ]
+                }
+            }
+        }
+    }, '13_21_IPunks.sol': {'IPunks': {'function': {'buyPunk': {'uint256': ['punkIndex'
+                    ]
+                }, 'punkIndexToAddress': {'uint256': ['punkIndex'
+                    ]
+                }, 'transferPunk': {'address': ['to'
+                    ], 'uint256': ['punkIndex'
+                    ]
+                }
+            }
+        }
+    }, '14_21_OwnableERC721.sol': {'OwnableERC721': {'function': {'owner': {}, 'ownershipToken': {}
+            }
+        }
+    }, '16_21_ERC1155Receiver.sol': {'ERC1155Receiver': {'function': {'onERC1155BatchReceived': {'address': ['operator', 'from'
+                    ], 'uint256[]': ['ids', 'values'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'onERC1155Received': {'address': ['operator', 'from'
+                    ], 'uint256': ['id', 'value'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '17_21_IERC1155Receiver.sol': {'IERC1155Receiver': {'function': {'onERC1155BatchReceived': {'address': ['operator', 'from'
+                    ], 'uint256[]': ['ids', 'values'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'onERC1155Received': {'address': ['operator', 'from'
+                    ], 'uint256': ['id', 'value'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '18_21_ERC165.sol': {'ERC165': {'function': {'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '19_21_IERC165.sol': {'IERC165': {'function': {'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '1_21_AssetVault.sol': {'AssetVault': {'constructor': {'constructor': {}
+            }, 'error': {'AV_AlreadyInitialized': {'address': ['ownershipToken'
+                    ]
+                }, 'AV_CallDisallowed': {'address': ['caller'
+                    ]
+                }, 'AV_NonWhitelistedCall': {'address': ['to'
+                    ], 'bytes4': ['data'
+                    ]
+                }, 'AV_WithdrawsDisabled': {}, 'AV_WithdrawsEnabled': {}, 'OERC721_CallerNotOwner': {'address': ['caller'
+                    ]
+                }
+            }, 'event': {'Call': {'address': ['operator', 'to'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'WithdrawERC1155': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId', 'amount'
+                    ]
+                }, 'WithdrawERC20': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'WithdrawERC721': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'WithdrawETH': {'address': ['operator', 'recipient'
+                    ], 'uint256': ['amount'
+                    ]
+                }, 'WithdrawEnabled': {'address': ['operator'
+                    ]
+                }, 'WithdrawPunk': {'address': ['operator', 'token', 'recipient'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }
+            }, 'function': {'call': {'address': ['to'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'enableWithdraw': {}, 'initialize': {'address': ['_whitelist'
+                    ]
+                }, 'onERC1155BatchReceived': {'address': [], 'uint256[]': [], 'bytes': []
+                }, 'onERC1155Received': {'address': [], 'uint256': [], 'bytes': []
+                }, 'onERC721Received': {'address': [], 'uint256': [], 'bytes': []
+                }, 'owner': {}, 'ownershipToken': {}, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }, 'whitelist': {}, 'withdrawERC1155': {'address': ['token', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'withdrawERC20': {'address': ['token', 'to'
+                    ]
+                }, 'withdrawERC721': {'address': ['token', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'withdrawETH': {'address': ['to'
+                    ]
+                }, 'withdrawEnabled': {}, 'withdrawPunk': {'address': ['punks', 'to'
+                    ], 'uint256': ['punkIndex'
+                    ]
+                }
+            }, 'receive': {}
+        }
+    }, '20_21_IERC721Receiver.sol': {'IERC721Receiver': {'function': {'onERC721Received': {'address': ['operator', 'from'
+                    ], 'uint256': ['tokenId'
+                    ], 'bytes': ['data'
+                    ]
+                }
+            }
+        }
+    }, '21_21_IERC721.sol': {'IERC721': {'event': {'Approval': {'address': ['owner', 'approved'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'ApprovalForAll': {'address': ['owner', 'operator'
+                    ], 'bool': ['approved'
+                    ]
+                }, 'Transfer': {'address': ['from', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }
+            }, 'function': {'approve': {'address': ['to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }, 'balanceOf': {'address': ['owner'
+                    ]
+                }, 'getApproved': {'uint256': ['tokenId'
+                    ]
+                }, 'isApprovedForAll': {'address': ['owner', 'operator'
+                    ]
+                }, 'ownerOf': {'uint256': ['tokenId'
+                    ]
+                }, 'safeTransferFrom': {'address': ['from', 'to'
+                    ], 'uint256': ['tokenId'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'setApprovalForAll': {'address': ['operator'
+                    ], 'bool': ['_approved'
+                    ]
+                }, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }, 'transferFrom': {'address': ['from', 'to'
+                    ], 'uint256': ['tokenId'
+                    ]
+                }
+            }
+        }
+    }, '2_21_IERC20.sol': {'IERC20': {'event': {'Approval': {'address': ['owner', 'spender'
                     ], 'uint256': ['value'
                     ]
                 }, 'Transfer': {'address': ['from', 'to'
@@ -20,58 +238,58 @@
                     ]
                 }
             }
-        }, 'IUniswapV2Factory': {'function': {'createPair': {'address': ['tokenA', 'tokenB'
-                    ]
-                }
-            }
-        }, 'IUniswapV2Router02': {'function': {'WETH': {}, 'addLiquidityETH': {'address': ['token', 'to'
-                    ], 'uint256': ['amountTokenDesired', 'amountTokenMin', 'amountETHMin', 'deadline'
-                    ]
-                }, 'factory': {}, 'swapExactTokensForETHSupportingFeeOnTransferTokens': {'uint256': ['amountIn', 'amountOutMin', 'deadline'
-                    ], 'address[]': ['path'
-                    ], 'address': ['to'
-                    ]
-                }
-            }
-        }, 'Ownable': {'constructor': {'constructor': {}
-            }, 'event': {'OwnershipTransferred': {'address': ['previousOwner', 'newOwner'
-                    ]
-                }
-            }, 'function': {'owner': {}, 'renounceOwnership': {}
-            }
-        }, 'SafeMath': {}, 'TURTLES': {'constructor': {'constructor': {}
-            }, 'event': {'Approval': {'address': ['owner', 'spender'
-                    ], 'uint256': ['value'
-                    ]
-                }, 'MaxTxAmountUpdated': {'uint256': ['_maxTxAmount'
-                    ]
-                }, 'OwnershipTransferred': {'address': ['previousOwner', 'newOwner'
-                    ]
-                }, 'Transfer': {'address': ['from', 'to'
-                    ], 'uint256': ['value'
-                    ]
-                }
-            }, 'function': {'_maxTaxSwap': {}, '_maxTxAmount': {}, '_maxWalletSize': {}, '_taxSwapThreshold': {}, 'addBots': {'address[]': ['bots_'
-                    ]
-                }, 'allowance': {'address': ['owner', 'spender'
-                    ]
-                }, 'approve': {'address': ['spender'
-                    ], 'uint256': ['amount'
-                    ]
-                }, 'balanceOf': {'address': ['account'
-                    ]
-                }, 'decimals': {}, 'delBots': {'address[]': ['notbot'
-                    ]
-                }, 'isBot': {'address': ['a'
-                    ]
-                }, 'name': {}, 'openTrading': {}, 'owner': {}, 'removeLimits': {}, 'renounceOwnership': {}, 'symbol': {}, 'totalSupply': {}, 'transfer': {'address': ['recipient'
-                    ], 'uint256': ['amount'
-                    ]
-                }, 'transferFrom': {'address': ['sender', 'recipient'
-                    ], 'uint256': ['amount'
-                    ]
-                }
-            }, 'receive': {}
         }
+    }, '3_21_Initializable.sol': {'Initializable': {}
+    }, '4_21_Address.sol': {'Address': {}
+    }, '5_21_ERC1155Holder.sol': {'ERC1155Holder': {'function': {'onERC1155BatchReceived': {'address': [], 'uint256[]': [], 'bytes': []
+                }, 'onERC1155Received': {'address': [], 'uint256': [], 'bytes': []
+                }, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '6_21_IERC1155.sol': {'IERC1155': {'event': {'ApprovalForAll': {'address': ['account', 'operator'
+                    ], 'bool': ['approved'
+                    ]
+                }, 'TransferBatch': {'address': ['operator', 'from', 'to'
+                    ], 'uint256[]': ['ids', 'values'
+                    ]
+                }, 'TransferSingle': {'address': ['operator', 'from', 'to'
+                    ], 'uint256': ['id', 'value'
+                    ]
+                }, 'URI': {'string': ['value'
+                    ], 'uint256': ['id'
+                    ]
+                }
+            }, 'function': {'balanceOf': {'address': ['account'
+                    ], 'uint256': ['id'
+                    ]
+                }, 'balanceOfBatch': {'address[]': ['accounts'
+                    ], 'uint256[]': ['ids'
+                    ]
+                }, 'isApprovedForAll': {'address': ['account', 'operator'
+                    ]
+                }, 'safeBatchTransferFrom': {'address': ['from', 'to'
+                    ], 'uint256[]': ['ids', 'amounts'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'safeTransferFrom': {'address': ['from', 'to'
+                    ], 'uint256': ['id', 'amount'
+                    ], 'bytes': ['data'
+                    ]
+                }, 'setApprovalForAll': {'address': ['operator'
+                    ], 'bool': ['approved'
+                    ]
+                }, 'supportsInterface': {'bytes4': ['interfaceId'
+                    ]
+                }
+            }
+        }
+    }, '7_21_ERC721Holder.sol': {'ERC721Holder': {'function': {'onERC721Received': {'address': [], 'uint256': [], 'bytes': []
+                }
+            }
+        }
+    }, '8_21_SafeERC20.sol': {'SafeERC20': {}
+    }, '9_21_ReentrancyGuard.sol': {'ReentrancyGuard': {}
     }
 }

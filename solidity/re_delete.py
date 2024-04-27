@@ -232,10 +232,10 @@ def get_parameters(parameters):
         result[parameter_type].append(parameter_name)
     return result
 
-def extract_functions(filepath, extracted={}):
-    def find_scopes(filename):
-        with open(filename, 'r') as f:
-            contract_content = f.read()
+def extract_functions(filename, function_details, extracted={}):
+    def find_scopes(contract_content):
+        # with open(filename, 'r') as f:
+        #     contract_content = f.read()
         
         scopes = {'interface': {}, 'contract': {}, 'library': {}, 'error': {}}
         current_type = None
@@ -327,8 +327,8 @@ def extract_functions(filepath, extracted={}):
             if current_type and current_name:
                 scopes[current_type][current_name].append(line)
         return scopes
-    events_functions = find_scopes(filepath)
-    filename = os.path.basename(filepath)
+    events_functions = find_scopes(function_details)
+    # filename = os.path.basename(filepath)
     #print(filename)
     # if extracted[filename] is None:
     extracted[filename] = {'interface': {}, 'contract': {}, 'library': {}, 'error': {}}
@@ -502,19 +502,37 @@ def remove_function_block(input_string, aim_string):
     return output_string
 
 def get_final(delete_dict, abis, functions_events):
+    # print(abis)
+    # print(1)
     final_dict = delete_dict
+    # print(functions_events)
     for filename, items in functions_events.items():
         # print(filename)
+        # print(1)
+        # for filenames , tmp in abis.items():
+            # for filename in filenames:
+            # print(filename)
+            # print(f"{filenames} {abis[filenames]}")
         # final_dict[filename]
+        # print(functions_events[filename])
+        # print(1)
+        # print(abis[filename])
+        # print(abis[filename])
         tmp = final_dict[filename]
+        # print(tmp)
         for contract_type, contracts in items.items():
+            # print(contract_type)
             for contract_name, functions in contracts.items():
+                # print(contract_name)
                 if contract_name not in abis[filename]:
                     select_str = contract_type + " " + contract_name
                     tmp = remove_function_block(tmp, select_str)
                 for function_type, function_details in functions.items():
+                    # print(function_type)
                     for function_name, parameters in function_details.items():
+                        # print(1)
                         # print(function_name)
+                        # print(2)
                         if function_name == 'constructor' or function_name == 'fallback' or function_name == 'receive':
                             
                             if function_name not in abis[filename][contract_name]:
@@ -549,6 +567,8 @@ def get_final(delete_dict, abis, functions_events):
                         if '' not in parameters:
                             for parameters_type, parameters_name in parameters.items():
                                 for parameter_name in parameters_name:
+                                    print(f"{filename} {contract_name} {function_type} {function_name} {parameters_type} {parameter_name}")
+                                    print(abis[filename][contract_name][function_type][function_name])
                                     if parameter_name not in abis[filename][contract_name][function_type][function_name][parameters_type]:
                                         select_str = function_type + " " + function_name
                                         tmp = remove_function_block(tmp, select_str)
@@ -586,7 +606,12 @@ def process_directory(source_code_folder, jsons_folder, json_list):
                 #print(abis)
                 
                 extracted = {}
-                functions_events = extract_functions(filepath, extracted)
+                functions_events = {}
+                for filename, items in delete_dict.items():
+                    functions_events = extract_functions(filename, delete_dict[filename], extracted)
+                    extracted = {}
+                
+                # functions_events = extract_functions(filepath, extracted)
                 #print(1)
                 
                 final_dict = get_final(delete_dict, abis, functions_events)
@@ -640,8 +665,8 @@ def multi_process_directory(source_code_folder, jsons_folder, json_list, p):
 if __name__ == "__main__":
     st = time.time()
     
-    source_code_folder = '/home/lxm/solidity/solidity/newnew/codes'
-    jsons_folder = '/home/lxm/solidity/solidity/newnew/jsons'
+    source_code_folder = '/home/lxm/solidity/solidity/newnew copy/codes'
+    jsons_folder = '/home/lxm/solidity/solidity/newnew copy/jsons'
     
     json_list = [file for file in os.listdir(jsons_folder) if os.path.isfile(os.path.join(jsons_folder, file))]
     #print(json_list)
