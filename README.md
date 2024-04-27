@@ -37,7 +37,5 @@
 3. 直接运行两个py文件，错误信息将输出在./error中
 
 Compile 1000 Files
-Total Time Cost: 2007.9720842838287
-Average Time Cost: 2.007972084283829
-
-生成的编译文件放在compile_info目录下，若编译失败，异常信息保存在error_info目录下。
+Total Time Cost: 1.6052758693695068
+Average Time Cost: 0.0016036721971723344
