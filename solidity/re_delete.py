@@ -75,8 +75,55 @@ def read_abis(abi_path):
                 if abi_type == 'fallback':
                     abi_name = 'fallback'
                 
-                if abi_name:
+                if abi_name in abis[filename][contract_name][abi_type] and not isinstance(abis[filename][contract_name][abi_type][abi_name], list):
+                    
+                    tmp_ls = []
+                    tmp_ls.append(abis[filename][contract_name][abi_type][abi_name])
+                    
+                    abis[filename][contract_name][abi_type][abi_name] = tmp_ls
+                    
+                    tmp_dict = {}
+                    
+                    if abi_inputs:
+                        for input_item in abi_inputs:
+                            input_type = input_item.get('internalType', None)
+                            if input_type and "contract" in input_type:
+                                input_type = input_type.replace("contract ", "")
+                            if not input_type:
+                                input_type = input_item.get('type', None)
+                            input_name = input_item.get('name', None)
+                            
+                            if input_type not in tmp_dict:
+
+                                tmp_dict[input_type] = []
+                            
+                            if input_name:
+                                tmp_dict[input_type].append(input_name)
+                    abis[filename][contract_name][abi_type][abi_name].append(tmp_dict)
+                    continue
+                if abi_name not in abis[filename][contract_name][abi_type]:
                     abis[filename][contract_name][abi_type][abi_name] = {}
+                if isinstance(abis[filename][contract_name][abi_type][abi_name], list):
+                    tmp_dict = {}
+                    
+                    if abi_inputs:
+                        for input_item in abi_inputs:
+                            input_type = input_item.get('internalType', None)
+                            if input_type and "contract" in input_type:
+                                input_type = input_type.replace("contract ", "")
+                            if not input_type:
+                                input_type = input_item.get('type', None)
+                            input_name = input_item.get('name', None)
+                            
+                            if input_type not in tmp_dict:
+
+                                tmp_dict[input_type] = []
+                            
+                            if input_name:
+                                tmp_dict[input_type].append(input_name)
+                    abis[filename][contract_name][abi_type][abi_name].append(tmp_dict)
+                    continue
+                
                 if abi_inputs:
                     for input_item in abi_inputs:
                         input_type = input_item.get('internalType', None)
@@ -94,7 +141,6 @@ def read_abis(abi_path):
                             abis[filename][contract_name][abi_type][abi_name][input_type].append(input_name)
     
     return abis
-
 
 def check_sol_files(directory):
     """Check for Solidity files in the given directory."""
@@ -126,8 +172,6 @@ def handle_error(e, p, filename=None):
     """Handle errors and write traceback to a file."""
     with open(os.path.join("/mnt/data/chenlongfei/liuxm/solidity/solidity/error", p + ".log"), "w") as file:
         file.write(traceback.format_exc())
-    
-
 
 def get_contents(input_file_path):
     pattern_pragma = r'pragma\s+solidity\s+(.*);'
@@ -162,7 +206,7 @@ def limit_recursion_depth(max_depth):
     return decorator
 
 # @timeout_decorator.timeout(50, use_signals=True)
-@limit_recursion_depth(10)
+@limit_recursion_depth(30)
 def file_import(filepath, G:dict = None, original_dict:dict = None, delete_dict:dict = None):
     if G is None:
         G = {}
@@ -227,7 +271,6 @@ def get_version(input_file, output_file):
             matched_f.write(preceding_content + matched_content + '\n')
             break
 
-   
 def get_parameters(parameters):
     parameters = parameters.split(',')
     parameters = [parameter.strip() for parameter in parameters]
@@ -243,6 +286,23 @@ def get_parameters(parameters):
             result[parameter_type] = []
         result[parameter_type].append(parameter_name)
     return result
+
+def store_function_name(dic, function_name, parameters):
+    if function_name in dic and not isinstance(dic[function_name], list):
+        tmp_ls = []
+        tmp_ls.append(dic[function_name])
+        dic[function_name] = tmp_ls
+        
+        dic[function_name].append(parameters)
+        return
+    
+    if function_name not in dic:
+        dic[function_name] = parameters
+        return
+    
+    if isinstance(dic[function_name], list):
+        dic[function_name].append(parameters)
+        return
 
 def extract_functions(filename, function_details, extracted={}):
     def find_scopes(contract_content):
@@ -344,10 +404,10 @@ def extract_functions(filename, function_details, extracted={}):
                         extracted[filename][contract_type][contract_name][function_type] = {}
                     function_name = match.group(2)
                     parameters = match.group(3)
-                    
                     parameters = get_parameters(parameters)
                     
-                    extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                    store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
+                    # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
                     continue
                 match = re.match(r'^\s*(constructor|fallback|receive)\s*\((.*?)\)\s*', line)
                 if match:
@@ -357,7 +417,9 @@ def extract_functions(filename, function_details, extracted={}):
                     function_name = match.group(1)
                     parameters = match.group(2)
                     parameters = get_parameters(parameters)
-                    extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                    
+                    store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
+                    # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
                     continue
                 match = re.match(r'^\s*(event|function|modifier|error)\s+(\w+)\s*\(+', line)
                 if match:
@@ -376,10 +438,12 @@ def extract_functions(filename, function_details, extracted={}):
                             if len(stack) == 0:
                                 parameters = re.match(r'^\s*(event|function|modifier|error)\s+(\w+)\s*\((.*?)\)\s*', parameters).group(3)
                                 parameters = get_parameters(parameters)
-                                extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                                # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
                                 break
                         parameters += line.strip()
                         index += 1
+                    
+                    store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
                     continue
                 match = re.match(r'^\s*(modifier)\s+(\w+)\s*', line)
                 if match:
@@ -401,10 +465,12 @@ def extract_functions(filename, function_details, extracted={}):
                                 if len(stack) == 0:
                                     parameters = re.match(r'^\s*(modifier)\s+(\w+)\s*\((.*?)\)\s*', parameters).group(3)
                                     parameters = get_parameters(parameters)
-                                    extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                                    # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
                                     break
                             parameters += line.strip()
                             index += 1
+                        store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
+                        continue
                     else:
                         index += 1
                         while index < len(code) and not ';' in code[index]:
@@ -420,13 +486,16 @@ def extract_functions(filename, function_details, extracted={}):
                                         if len(stack) == 0:
                                             parameters = re.match(r'^\s*(modifier)\s+(\w+)\s*\((.*?)\)\s*', parameters).group(3)
                                             parameters = get_parameters(parameters)
-                                            extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                                            # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                                            store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
                                             break
                                     parameters += line.strip()
                                     index += 1
                                 break
                             index += 1
-                        extracted[filename][contract_type][contract_name][function_type][function_name] = {'': ['']}
+                        parameters = {'': ['']}
+                        store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
+                        # extracted[filename][contract_type][contract_name][function_type][function_name] = {'': ['']}
                     continue
                 match = re.match(r'^\s*(constructor|fallback|receive)\s+(\w+)\s*\(+', line)
                 if match:
@@ -446,7 +515,8 @@ def extract_functions(filename, function_details, extracted={}):
                             if len(stack) == 0:
                                 parameters = re.match(r'^\s*(constructor|fallback|receive)\s*\((.*?)\)\s*', parameters).group(2)
                                 parameters = get_parameters(parameters)
-                                extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
+                                store_function_name(extracted[filename][contract_type][contract_name][function_type], function_name, parameters)
+                                # extracted[filename][contract_type][contract_name][function_type][function_name] = parameters
                                 break
                         parameters += line.strip()
                         index += 1

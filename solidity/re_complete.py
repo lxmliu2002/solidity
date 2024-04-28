@@ -108,7 +108,7 @@ def limit_recursion_depth(max_depth):
     return decorator
 
 # @timeout_decorator.timeout(50, use_signals=True)
-@limit_recursion_depth(10)
+@limit_recursion_depth(30)
 def file_import(filepath, G:dict = None, original_dict:dict = None, delete_dict:dict = None):
     if G is None:
         G = {}
