@@ -621,7 +621,7 @@ def process_directory(source_code_folder, jsons_folder, json_list):
             if not check_sol_files(path):
                 raise FileNotFoundError("Error: No contracts found.")
             filename = get_filename(path)
-            output_filename = "delete_" + filename
+            output_filename = "lxmdelete"
             filepath = os.path.join(path, filename)
             out_filepath = os.path.join(path, output_filename)
             
@@ -659,7 +659,7 @@ def multi_process_directory(source_code_folder, jsons_folder, json_list, p):
         if not check_sol_files(path):
             raise FileNotFoundError("Error: No contracts found.")
         filename = get_filename(path)
-        output_filename = "delete_" + filename
+        output_filename = "lxmdelete"
         filepath = os.path.join(path, filename)
         out_filepath = os.path.join(path, output_filename)
         

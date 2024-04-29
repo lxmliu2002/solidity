@@ -12,6 +12,6 @@ def delete_files_with_prefix(root_folder, prefix_list):
 
 root_folder = "/mnt/data/chenlongfei/liuxm/solidity/solidity/contracts/codes"
 
-prefix_list = ["complete", "delete"]
+prefix_list = ["complete", "delete", "lxm"]
 
 delete_files_with_prefix(root_folder, prefix_list)

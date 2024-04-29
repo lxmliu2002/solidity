@@ -1,0 +1,42 @@
+{
+    "sol_code_100.pickle": {
+        "before_avg_len": 20470.93,
+        "after_avg_len": 10026.67
+    },
+    "sol_code_200.pickle": {
+        "before_avg_len": 15673.98,
+        "after_avg_len": 8120.55
+    },
+    "sol_code_300.pickle": {
+        "before_avg_len": 19291.47,
+        "after_avg_len": 11272.92
+    },
+    "sol_code_400.pickle": {
+        "before_avg_len": 17533.35,
+        "after_avg_len": 8796.63
+    },
+    "sol_code_500.pickle": {
+        "before_avg_len": 15796.99,
+        "after_avg_len": 8922.17
+    },
+    "sol_code_600.pickle": {
+        "before_avg_len": 20064.48,
+        "after_avg_len": 11314.86
+    },
+    "sol_code_700.pickle": {
+        "before_avg_len": 16588.96,
+        "after_avg_len": 8738.59
+    },
+    "sol_code_800.pickle": {
+        "before_avg_len": 20886.97,
+        "after_avg_len": 11994.89
+    },
+    "sol_code_900.pickle": {
+        "before_avg_len": 17613.28,
+        "after_avg_len": 12492.88
+    },
+    "sol_code_990.pickle": {
+        "before_avg_len": 16123.877777777778,
+        "after_avg_len": 12002.144444444444
+    }
+}
